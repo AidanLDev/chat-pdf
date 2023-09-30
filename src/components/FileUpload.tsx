@@ -44,7 +44,8 @@ const FileUpload = () => {
           return;
         }
         mutate(data, {
-          onSuccess: () => {
+          onSuccess: (data) => {
+            console.log(data)
             toast.success("PDF successfully uploaded");
           },
           onError: () => {
