@@ -14,6 +14,9 @@ dependencies:
   '@neondatabase/serverless':
     specifier: ^0.6.0
     version: 0.6.0
+  '@pinecone-database/doc-splitter':
+    specifier: ^0.0.1
+    version: 0.0.1
   '@pinecone-database/pinecone':
     specifier: ^1.1.0
     version: 1.1.0
@@ -23,6 +26,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^4.35.3
     version: 4.35.3(react-dom@18.2.0)(react@18.2.0)
+  '@types/md5':
+    specifier: ^2.3.3
+    version: 2.3.3
   '@types/node':
     specifier: 20.6.3
     version: 20.6.3
@@ -65,9 +71,15 @@ dependencies:
   lucide-react:
     specifier: ^0.279.0
     version: 0.279.0(react@18.2.0)
+  md5:
+    specifier: ^2.3.0
+    version: 2.3.0
   next:
     specifier: 13.5.2
     version: 13.5.2(react-dom@18.2.0)(react@18.2.0)
+  openai-edge:
+    specifier: ^1.2.2
+    version: 1.2.2
   pdf-parse:
     specifier: ^1.1.1
     version: 1.1.1
@@ -1242,6 +1254,11 @@ packages:
       webcrypto-core: 1.7.7
     dev: false
 
+  /@pinecone-database/doc-splitter@0.0.1:
+    resolution: {integrity: sha512-UCJgNZKnXPcrTblI9ui6H+HbQbyYf8bsGQAGR3f4IYW2Lw1zQ0izFrjGsCgqiP+GE837JXv43+qgkSqwWlnZtA==}
+    engines: {node: '>=14.0.0'}
+    dev: false
+
   /@pinecone-database/pinecone@1.1.0:
     resolution: {integrity: sha512-THg+D3cSYVCMmphroOEBQOU9UsOhABYcrExZyurcz8cZ3znipDyJuiX9F3CavysnQa5DTzQEZxcH1YmEMGW8mg==}
     engines: {node: '>=14.0.0'}
@@ -1797,6 +1814,10 @@ packages:
 
   /@types/keygrip@1.0.3:
     resolution: {integrity: sha512-tfzBBb7OV2PbUfKbG6zRE5UbmtdLVCKT/XT364Z9ny6pXNbd9GnIB6aFYpq2A5lZ6mq9bhXgK6h5MFGNwhMmuQ==}
+    dev: false
+
+  /@types/md5@2.3.3:
+    resolution: {integrity: sha512-4K40FjTW0tiIx9NfV+/DHJ56ih3fcdkDqBYz5CffKwJVWYho1FxzjkddGcgEEIs+fP2DqmQ3lujC5c4bUOESTQ==}
     dev: false
 
   /@types/mime@1.3.2:
@@ -4552,6 +4573,11 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
+
+  /openai-edge@1.2.2:
+    resolution: {integrity: sha512-C3/Ao9Hkx5uBPv9YFBpX/x59XMPgPUU4dyGg/0J2sOJ7O9D98kD+lfdOc7v/60oYo5xzMGct80uFkYLH+X2qgw==}
+    engines: {node: '>=18'}
+    dev: false
 
   /openai@4.4.0:
     resolution: {integrity: sha512-JN0t628Kh95T0IrXl0HdBqnlJg+4Vq0Bnh55tio+dfCnyzHvMLiWyCM9m726MAJD2YkDU4/8RQB6rNbEq9ct2w==}
