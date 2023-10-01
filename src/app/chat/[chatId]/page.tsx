@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import ChatSideBar from "@/components/ChatSideBar";
 import PDFViewer from "@/components/PDFViewer";
+import ChatComponent from "@/components/ChatComponent";
 import React from "react";
 
 type Props = {
@@ -38,7 +39,7 @@ export default async function ChatPage({ params: { chatId } }: Props) {
           <PDFViewer pdf_url={currentChat?.pdfUrl || ""} />
         </div>
         <div className="flex-[3] border-1-4 border-l-slate-200">
-          {/* <ChatComponent /> */}
+          <ChatComponent />
         </div>
       </div>
     </div>
