@@ -5,6 +5,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { MessageCircle, PlusCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import SubscriptionButton from "./SubscriptionButton";
 
 type Props = {
   chats: DrizzleChat[];
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const ChatSideBar = ({ chats, chatId }: Props) => {
+
   return (
     <div className="w-full h-screen p-4 text-gray-200 bg-gray-900">
       <Link href="/">
@@ -41,8 +43,9 @@ const ChatSideBar = ({ chats, chatId }: Props) => {
           <div className="flex items-center gap-2 text-sm text-slate-500 flex-wrap">
             <Link href="/">Home</Link>
             <Link href="/">Source</Link>
-            {/* Stripe Button  */}
           </div>
+          {/* TODO: Get isPro */}
+          <SubscriptionButton isPro={false} />
         </div>
       </div>
     </div>

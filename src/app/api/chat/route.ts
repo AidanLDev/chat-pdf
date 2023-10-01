@@ -2,7 +2,7 @@ import { Configuration, OpenAIApi } from "openai-edge";
 import { Message, OpenAIStream, StreamingTextResponse } from "ai";
 import { getContext } from "@/lib/context";
 import { db } from "@/lib/db";
-import { chats } from "@/lib/db/schema";
+import { chats, messages as _messages } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
@@ -23,7 +23,6 @@ export async function POST(req: Request) {
     }
     const fileKey = _chats[0].fileKey;
     const lastMessage = messages[messages.length - 1];
-    console.log("lastMessage: ", lastMessage);
     const context = await getContext(lastMessage.content, fileKey);
 
     const prompt = {
@@ -53,7 +52,26 @@ export async function POST(req: Request) {
       stream: true,
     });
 
-    return new StreamingTextResponse(OpenAIStream(res));
+    return new StreamingTextResponse(
+      OpenAIStream(res, {
+        onStart: async () => {
+          // save users message into the DB
+          await db.insert(_messages).values({
+            chatId,
+            content: lastMessage.content,
+            role: "user",
+          });
+        },
+        onCompletion: async (completion) => {
+          // save AI message into db
+          await db.insert(_messages).values({
+            chatId,
+            content: completion,
+            role: "system",
+          });
+        },
+      })
+    );
   } catch (error) {
     console.error(error);
   }
