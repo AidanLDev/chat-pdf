@@ -52,27 +52,28 @@ export async function POST(req: Request) {
       stream: true,
     });
 
-    return new StreamingTextResponse(
-      OpenAIStream(res, {
-        onStart: async () => {
-          // save users message into the DB
-          await db.insert(_messages).values({
-            chatId,
-            content: lastMessage.content,
-            role: "user",
-          });
-        },
-        onCompletion: async (completion) => {
-          // save AI message into db
-          await db.insert(_messages).values({
-            chatId,
-            content: completion,
-            role: "system",
-          });
-        },
-      })
-    );
+    const stream = OpenAIStream(res, {
+      onStart: async () => {
+        // save users message into the DB
+        await db.insert(_messages).values({
+          chatId,
+          content: lastMessage.content,
+          role: "user",
+        });
+      },
+      onCompletion: async (completion) => {
+        // save AI message into db
+        await db.insert(_messages).values({
+          chatId,
+          content: completion,
+          role: "system",
+        });
+      },
+    })
+
+    return new StreamingTextResponse(stream);
   } catch (error) {
     console.error(error);
+    return NextResponse.json('error generating chat', { status: 500 })
   }
 }
