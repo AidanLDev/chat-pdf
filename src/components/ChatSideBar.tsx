@@ -10,10 +10,10 @@ import SubscriptionButton from "./SubscriptionButton";
 type Props = {
   chats: DrizzleChat[];
   chatId: number;
+  isPro: boolean;
 };
 
-const ChatSideBar = ({ chats, chatId }: Props) => {
-
+const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
   return (
     <div className="w-full h-screen p-4 text-gray-200 bg-gray-900">
       <Link href="/">
@@ -45,7 +45,7 @@ const ChatSideBar = ({ chats, chatId }: Props) => {
             <Link href="/">Source</Link>
           </div>
           {/* TODO: Get isPro */}
-          <SubscriptionButton isPro={false} />
+          <SubscriptionButton isPro={isPro} />
         </div>
       </div>
     </div>
