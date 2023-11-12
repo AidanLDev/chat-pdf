@@ -41,7 +41,7 @@ export default function ChatComponent({ chatId }: Props) {
 
   return (
     <div
-      className="relative max-h-screen overflow-scroll"
+      className="flex flex-col gap-4 max-h-screen overflow-auto"
       id="message-container"
     >
       <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit">
@@ -49,22 +49,24 @@ export default function ChatComponent({ chatId }: Props) {
       </div>
       <MessageList messages={messages} isLoading={isLoading} />
 
-      <form
-        onSubmit={handleSubmit}
-        className="sticky bottom-0 inset-x-0 px-2 py-4 bg-white"
-      >
-        <div className="flex">
-          <Input
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Ask any question"
-            className="w-full"
-          />
-          <Button className="bg-blue-600 ml-2">
-            <SendIcon className="h-4 w-4 " />
-          </Button>
-        </div>
-      </form>
+      <div className="flex flex-col justify-between h-screen">
+        <form
+          onSubmit={handleSubmit}
+          className="inset-x-0 px-2 pb-8 mt-auto bg-white inline-block"
+        >
+          <div className="flex">
+            <Input
+              value={input}
+              onChange={handleInputChange}
+              placeholder="Ask any question"
+              className="w-full"
+            />
+            <Button className="bg-blue-600 ml-2">
+              <SendIcon className="h-4 w-4 " />
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

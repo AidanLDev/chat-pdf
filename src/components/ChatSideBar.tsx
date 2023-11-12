@@ -41,11 +41,11 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
         ))}
         <div className="absolute bottom-4 left-4">
           <div className="flex items-center gap-2 text-sm text-slate-500 flex-wrap">
-            <Link href="/">Home</Link>
-            <Link href="/">Source</Link>
+            <Link href="/">
+              <Button className="border">Home</Button>
+            </Link>
+            <SubscriptionButton isPro={isPro} />
           </div>
-          {/* TODO: Get isPro */}
-          <SubscriptionButton isPro={isPro} />
         </div>
       </div>
     </div>
