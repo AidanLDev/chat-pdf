@@ -31,7 +31,6 @@ const FileUpload = () => {
     accept: { "application/pdf": [".pdf"] },
     maxFiles: 1,
     onDrop: async (acceptedFiles) => {
-      console.log("acceptedFiles: ", acceptedFiles);
       const file = acceptedFiles[0];
       if (file.size > 10 * 1024 * 1024) {
         // Bigger than 10mb!
@@ -56,7 +55,6 @@ const FileUpload = () => {
             console.error(err);
           },
         });
-        console.log("data: ", data);
       } catch (error) {
         console.error("Failed to upload to S3: ", error);
       } finally {

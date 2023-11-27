@@ -24,12 +24,10 @@ type PDFPage = {
 
 export async function loadS3IntoPinecone(fileKey: string) {
   // Obtain PDF -> download and read from PDF
-  console.log("Downloading S3 into file system");
   const file_name = await downloadFromS3(fileKey);
   if (!file_name) {
     throw new Error("Could not download PDF from S3");
   }
-  console.log("loading pdf into memory" + file_name);
   const loader = new PDFLoader(file_name);
   const pages = (await loader.load()) as PDFPage[];
 
@@ -42,13 +40,10 @@ export async function loadS3IntoPinecone(fileKey: string) {
   // Upload to pinecone
   const client = await getPineconeClient();
   const pineconeIndex = client.index("chatpdf");
-
-  console.log("Inserting vectors into pinecone");
   // TODO: Convert to aws-starter project through the aws market place to
   // utilise namespaces
   // const nameSpace = pineconeIndex.namespace(convertToAscii(fileKey));
   await pineconeIndex.upsert(vectors);
-  console.log("finished upserting into pinecone");
 
   return documents[0];
 }

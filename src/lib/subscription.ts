@@ -4,6 +4,7 @@ import { userSubscriptions } from "./db/schema";
 import { eq } from "drizzle-orm";
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
+const MONTH_IN_MS = DAY_IN_MS * 31;
 
 export const checkSubscription = async function () {
   const { userId } = await auth();
@@ -24,7 +25,7 @@ export const checkSubscription = async function () {
 
   const isValid =
     userSubscription.stripePriceId &&
-    userSubscription.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS >
+    userSubscription.stripeCurrentPeriodEnd?.getTime()! + MONTH_IN_MS >
       Date.now();
 
   return !!isValid;

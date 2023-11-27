@@ -9,7 +9,6 @@ const return_url = process.env.NEXT_BASE_URL + "/account";
 
 //  /api/stripe
 export async function GET() {
-  console.log("get stripe");
   try {
     const { userId } = await auth();
     const user = await currentUser();

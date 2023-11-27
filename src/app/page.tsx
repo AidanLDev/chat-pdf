@@ -47,6 +47,9 @@ export default async function Home() {
           </p>
           <div className="w-full mt-4">
             {isAuth ? (
+              // TODO: Add check for users current chats and IF
+              // they have more than 3 chats && !isPro, don't render
+              // FileUpload component
               <FileUpload />
             ) : (
               <Link href="sign-in">
