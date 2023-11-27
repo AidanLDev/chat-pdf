@@ -14,13 +14,21 @@ export default async function Home() {
   const { userId } = await auth();
   const isAuth = !!userId;
   const isPro = await checkSubscription();
+
+  let allChats;
   let firstChat;
+  let numberOfChats;
+
   if (userId) {
-    firstChat = await db.select().from(chats).where(eq(chats.userId, userId));
-    if (firstChat) {
-      firstChat = firstChat[0];
+    allChats = await db.select().from(chats).where(eq(chats.userId, userId));
+    if (allChats) {
+      firstChat = allChats[0];
+      numberOfChats = allChats.length;
     }
   }
+
+  const disableChat = numberOfChats && numberOfChats >= 3 && !isPro;
+
   return (
     <div className="w-screen min-h-screen bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100">
       <Center>
@@ -47,10 +55,11 @@ export default async function Home() {
           </p>
           <div className="w-full mt-4">
             {isAuth ? (
-              // TODO: Add check for users current chats and IF
-              // they have more than 3 chats && !isPro, don't render
-              // FileUpload component
-              <FileUpload />
+              disableChat ? (
+                <h1>Free tier supports 3 documents, please ugrade to pro</h1>
+              ) : (
+                <FileUpload />
+              )
             ) : (
               <Link href="sign-in">
                 <Button>
