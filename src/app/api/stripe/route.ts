@@ -5,7 +5,8 @@ import { auth, currentUser } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-const return_url = process.env.NEXT_BASE_URL + "/account";
+// TODO: Once we have the /account page set-up, update return_url to go to /account
+const returnUrl = process.env.NEXT_BASE_URL + "/";
 
 //  /api/stripe
 export async function GET() {
@@ -23,17 +24,19 @@ export async function GET() {
       .where(eq(userSubscriptions.userId, userId));
     if (_userSubscriptions[0] && _userSubscriptions[0].stripeCustomerId) {
       // Trying to cancel at the billing portal
+      // TODO: Add un-sub method here!
+      // https://docs.stripe.com/api/subscriptions/cancel
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: _userSubscriptions[0].stripeCustomerId,
-        return_url,
+        return_url: returnUrl,
       });
       return NextResponse.json({ url: stripeSession.url });
     }
 
     // User's first time trying to subscribe
     const stripeSession = await stripe.checkout.sessions.create({
-      success_url: return_url,
-      cancel_url: return_url,
+      success_url: returnUrl,
+      cancel_url: returnUrl,
       payment_method_types: ["card"],
       mode: "subscription",
       billing_address_collection: "auto",
