@@ -23,8 +23,7 @@ export async function GET() {
       .from(userSubscriptions)
       .where(eq(userSubscriptions.userId, userId));
     if (_userSubscriptions[0] && _userSubscriptions[0].stripeCustomerId) {
-      // Trying to cancel at the billing portal
-      // TODO: Add un-sub method here!
+      const subscriptionId = _userSubscriptions[0].stripeSubscriptionId;
       // https://docs.stripe.com/api/subscriptions/cancel
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: _userSubscriptions[0].stripeCustomerId,

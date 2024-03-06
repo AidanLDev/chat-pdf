@@ -21,6 +21,7 @@ export default async function Home() {
 
   if (userId) {
     allChats = await db.select().from(chats).where(eq(chats.userId, userId));
+    console.log(userId);
     if (allChats) {
       firstChat = allChats[0];
       numberOfChats = allChats.length;
