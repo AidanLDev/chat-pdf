@@ -1,11 +1,10 @@
-import { NeonQueryFunction, neon, neonConfig } from '@neondatabase/serverless'
-import { drizzle } from 'drizzle-orm/neon-http';
+import { NeonQueryFunction, neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
-neonConfig.fetchConnectionCache = true;
 if (!process.env.DATABASE_URL) {
-    throw new Error('Databse url not found')
+  throw new Error("Databse url not found");
 }
 
-const sql: NeonQueryFunction<boolean, boolean> = neon(process.env.DATABASE_URL)
+const sql: NeonQueryFunction<boolean, boolean> = neon(process.env.DATABASE_URL);
 
-export const db = drizzle(sql)
+export const db = drizzle(sql);

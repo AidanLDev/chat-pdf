@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from "openai-edge";
+import OpenAI from "openai";
 import { Message, OpenAIStream, StreamingTextResponse } from "ai";
 import { getContext } from "@/lib/context";
 import { db } from "@/lib/db";
@@ -6,13 +6,11 @@ import { chats, messages as _messages } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export const runtime = "edge"; // Makes function faster by deploying to the edge
-
-const config = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(config);
+export const runtime = "edge"; // Makes function faster by deploying to the edge
 
 export async function POST(req: Request) {
   try {
@@ -43,7 +41,7 @@ export async function POST(req: Request) {
       `,
     };
 
-    const res = await openai.createChatCompletion({
+    const res = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         prompt,
@@ -69,11 +67,11 @@ export async function POST(req: Request) {
           role: "system",
         });
       },
-    })
+    });
 
     return new StreamingTextResponse(stream);
   } catch (error) {
     console.error(error);
-    return NextResponse.json('error generating chat', { status: 500 })
+    return NextResponse.json("error generating chat", { status: 500 });
   }
 }

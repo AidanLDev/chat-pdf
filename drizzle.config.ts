@@ -1,14 +1,14 @@
-import type { Config } from 'drizzle-kit'
-import * as dotenv from 'dotenv'
-dotenv.config({ path: '.env' })
+import type { Config } from "drizzle-kit";
+import * as dotenv from "dotenv";
+dotenv.config({ path: ".env" });
 
 export default {
-    driver: 'pg',
-    schema: './src/lib/db/schema.ts',
-    dbCredentials: {
-        connectionString: process.env.DATABASE_URL!,
-    }
-} satisfies Config
+  driver: "pg",
+  schema: "./src/lib/db/schema.ts",
+  dbCredentials: {
+    connectionString: process.env.DATABASE_URL!,
+  },
+} satisfies Config;
 
 // Run the below to push our schema to drizzle
 // npx drizzle-kit push:pg
