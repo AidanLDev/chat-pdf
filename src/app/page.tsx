@@ -57,7 +57,7 @@ export default async function Home() {
           </p>
           <div className="w-full mt-4">
             {isAuth ? (
-              !disableChat ? (
+              disableChat ? (
                 <h1>Free tier supports 3 documents, please ugrade to pro</h1>
               ) : (
                 <FileUpload />
