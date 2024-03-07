@@ -22,9 +22,9 @@ export async function POST(req: Request, res: Response) {
     numberOfChats = allChats.length;
   }
 
-  if (!isPro && numberOfChats >= 3) {
-    return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
-  }
+  // if (!isPro && numberOfChats >= 3) {
+  //   return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
+  // }
 
   try {
     const body = await req.json();
