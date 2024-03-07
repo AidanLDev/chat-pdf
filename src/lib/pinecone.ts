@@ -7,13 +7,7 @@ import {
 } from "@pinecone-database/doc-splitter";
 import { getEmbeddings } from "./embeddings";
 import md5 from "md5";
-// import { convertToAscii } from "./utils";
-
-export const getPineconeClient = async () =>
-  new Pinecone({
-    environment: process.env.PINECONE_ENVIRONMENT!,
-    apiKey: process.env.PINECONE_API_KEY!,
-  });
+import { convertToAscii } from "./utils";
 
 type PDFPage = {
   pageContent: string;
@@ -38,12 +32,14 @@ export async function loadS3IntoPinecone(fileKey: string) {
   const vectors = await Promise.all(documents.flat().map(embedDocument));
 
   // Upload to pinecone
-  const client = await getPineconeClient();
-  const pineconeIndex = client.index("chatpdf");
-  // TODO: Convert to aws-starter project through the aws market place to
-  // utilise namespaces
-  // const nameSpace = pineconeIndex.namespace(convertToAscii(fileKey));
-  await pineconeIndex.upsert(vectors);
+  const pc = new Pinecone({
+    apiKey: process.env.PINECONE_API_KEY!,
+    environment: process.env.PINECONE_ENVIRONMENT!,
+  });
+  const pineconeIndex = await pc.index("chatpdf");
+  const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
+
+  await namespace.upsert(vectors);
 
   return documents[0];
 }
