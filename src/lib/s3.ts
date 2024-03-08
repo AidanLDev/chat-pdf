@@ -1,11 +1,11 @@
-import AWS from "aws-sdk";
+import { S3 } from "@aws-sdk/client-s3";
 
 export async function uploadToS3(
   file: File
 ): Promise<{ file_key: string; file_name: string }> {
   return new Promise((resolve, reject) => {
     try {
-      const s3 = new AWS.S3({
+      const s3 = new S3({
         region: "eu-west-2",
         credentials: {
           accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID!,
@@ -21,22 +21,12 @@ export async function uploadToS3(
         Key: file_key,
         Body: file,
       };
-      s3.putObject(params)
-        .on("httpUploadProgress", (evt) => {
-          console.log(
-            "uploading to s3...",
-            parseInt(((evt.loaded * 100) / evt.total).toString()),
-            "%"
-          );
-        })
-        .promise();
-
-      s3.putObject(params, () => {
-        return resolve({
+      s3.putObject(params).then(() =>
+        resolve({
           file_key,
           file_name: file.name,
-        });
-      });
+        })
+      );
     } catch (error) {
       reject(error);
     }
