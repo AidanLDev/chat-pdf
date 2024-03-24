@@ -33,8 +33,8 @@ export default async function Home() {
     <div className="w-screen min-h-screen bg-background">
       <Center>
         <div className="flex flex-col items-center text-center">
-          <div className="flex items-center">
-            <h1 className="mr-3 text-5xl font-semibold text-primary">
+          <div className="flex items-center animate-fly-in-from-top transition-all duration-1500 ease-in-out">
+            <h1 className="mr-3 text-7xl font-semibold text-primary animate-glow animation text-stroke">
               Chat with any PDF
             </h1>
             <UserButton afterSignOutUrl="/" />
