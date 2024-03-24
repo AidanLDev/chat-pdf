@@ -30,11 +30,13 @@ export default async function Home() {
   const disableChat = numberOfChats && numberOfChats >= 3 && !isPro;
 
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100">
+    <div className="w-screen min-h-screen bg-background">
       <Center>
         <div className="flex flex-col items-center text-center">
           <div className="flex items-center">
-            <h1 className="mr-3 text-5xl font-semibold">Chat with any PDF</h1>
+            <h1 className="mr-3 text-5xl font-semibold text-primary">
+              Chat with any PDF
+            </h1>
             <UserButton afterSignOutUrl="/" />
           </div>
           <div className="flex mt-2">
@@ -51,14 +53,10 @@ export default async function Home() {
               </>
             )}
           </div>
-          <p className="max-w-xl mt-1 text-lg text-slate-600">
-            Join millions of students. researchers and professionals to
-            instantly answer questions and understand research with AI{" "}
-          </p>
           <div className="w-full mt-4">
             {isAuth ? (
               disableChat ? (
-                <h1>Free tier supports 3 documents, please ugrade to pro</h1>
+                <h1>Free tier supports 3 documents, please upgrade to pro</h1>
               ) : (
                 <FileUpload />
               )

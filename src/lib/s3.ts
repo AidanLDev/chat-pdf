@@ -1,7 +1,7 @@
 import { S3 } from "@aws-sdk/client-s3";
 
 export async function uploadToS3(
-  file: File
+  file: File,
 ): Promise<{ file_key: string; file_name: string }> {
   return new Promise((resolve, reject) => {
     try {
@@ -14,7 +14,7 @@ export async function uploadToS3(
       });
       const file_key = `uploads/${Date.now().toString()}${file.name.replace(
         " ",
-        "-"
+        "-",
       )}`;
       const params = {
         Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME!,
@@ -25,7 +25,7 @@ export async function uploadToS3(
         resolve({
           file_key,
           file_name: file.name,
-        })
+        }),
       );
     } catch (error) {
       reject(error);

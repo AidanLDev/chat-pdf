@@ -17,7 +17,7 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
   return (
     <div className="w-full h-screen p-4 text-gray-200 bg-gray-900">
       <Link href="/">
-        <Button className="w-full border-dashed border-white border">
+        <Button className="w-full border-dashed border-white border text-primary-foreground">
           <PlusCircle className="mr-2 w-4 h-4" />
           New Chat
         </Button>
@@ -40,9 +40,9 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
           </Link>
         ))}
         <div className="absolute bottom-4 left-4">
-          <div className="flex items-center gap-2 text-sm text-slate-500 flex-wrap">
+          <div className="flex items-center gap-2 text-sm flex-wrap">
             <Link href="/">
-              <Button className="border">Home</Button>
+              <Button className="border text-primary-foreground">Home</Button>
             </Link>
             <SubscriptionButton isPro={isPro} />
           </div>

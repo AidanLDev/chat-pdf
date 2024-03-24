@@ -4,7 +4,7 @@ import { getEmbeddings } from "./embeddings";
 
 export async function getMatchesFromEmbeddings(
   embeddings: number[],
-  fileKey: string
+  fileKey: string,
 ) {
   try {
     const client = new Pinecone({
@@ -30,7 +30,7 @@ export async function getContext(query: string, fileKey: string) {
   const matches = await getMatchesFromEmbeddings(queryEmbeddings, fileKey);
 
   const qualifyingDocs = matches.filter(
-    (match) => match.score && match.score > 0.7
+    (match) => match.score && match.score > 0.7,
   );
 
   type Metadata = {
