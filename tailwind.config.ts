@@ -1,4 +1,4 @@
-import { TailwindUtilities } from "tailwindcss/tailwind-config";
+import { PluginAPI } from "tailwindcss/types/config";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
       animation: {
         "fly-in-from-top": "flyInFromTop 1.5s ease-in-out",
         glow: "glow 2s ease-in-out infinite alternate",
-        appear: "appear 1s ease-in-out forwards",
+        appear: "appear 1.5s ease-in-out forwards",
       },
       textStroke: {
         "3": "3px",
@@ -54,11 +54,11 @@ module.exports = {
       glow: {
         from: {
           textShadow:
-            "0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--secondary), 0 0 20px var(--secondary), 0 0 25px var(--secondary), 0 0 30px var(--secondary), 0 0 35px var(--secondary)",
+            "0 0 2px #fff, 0 0 5px #fff, 0 0 7px var(--secondary), 0 0 5px var(--secondary), 0 0 12px var(--secondary), 0 0 15px var(--secondary), 0 0 17px var(--secondary)",
         },
         to: {
           textShadow:
-            "0 0 10px #fff, 0 0 15px var(--outer-glow), 0 0 20px var(--outer-glow), 0 0 25px var(--outer-glow), 0 0 30px var(--outer-glow), 0 0 35px var(--outer-glow), 0 0 40px var(--outer-glow)",
+            "0 0 5px #fff, 0 0 7px var(--outer-glow), 0 0 10px var(--outer-glow), 0 0 12px var(--outer-glow), 0 0 15px var(--outer-glow), 0 0 17px var(--outer-glow), 0 0 20px var(--outer-glow)",
         },
       },
       appear: {
@@ -69,7 +69,7 @@ module.exports = {
   },
   plugins: [
     "@tailwindcss/animations",
-    function ({ addUtilities }: { addUtilities: TailwindUtilities }) {
+    function ({ addUtilities }: PluginAPI) {
       const newUtilities = {
         ".text-stroke": {
           "-webkit-text-stroke": "2px black",
