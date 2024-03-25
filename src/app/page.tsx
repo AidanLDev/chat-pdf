@@ -34,7 +34,7 @@ export default async function Home() {
       <Center>
         <div className="flex flex-col items-center text-center">
           <div className="flex items-center animate-fly-in-from-top transition-all duration-1500 ease-in-out">
-            <h1 className="mr-3 text-7xl font-semibold text-primary animate-glow animation text-stroke cursor-default">
+            <h1 className="mr-3 md:text-7xl text-5xl font-semibold text-primary animate-glow animation text-stroke cursor-default">
               Chat with any PDF
             </h1>
             <UserButton afterSignOutUrl="/" />
