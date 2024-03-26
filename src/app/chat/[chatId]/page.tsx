@@ -22,10 +22,7 @@ export default async function ChatPage({ params: { chatId } }: Props) {
   }
   const isPro = await checkSubscription();
   const _chats = await db.select().from(chats).where(eq(chats.userId, userId));
-  if (!_chats) {
-    return redirect("/");
-  }
-  if (!_chats.find((chat) => chat.id === parseInt(chatId))) {
+  if (!_chats || !_chats.find((chat) => chat.id === parseInt(chatId))) {
     return redirect("/");
   }
 
@@ -33,10 +30,8 @@ export default async function ChatPage({ params: { chatId } }: Props) {
 
   return (
     <div className="flex max-h-screen overflow-auto">
-      <div className="flex w-full max-h-screen overflow-auto">
-        <div className="flex-[1] max-w-xs">
-          <ChatSideBar chats={_chats} chatId={parseInt(chatId)} isPro={isPro} />
-        </div>
+      <div className="md:flex md:w-full max-h-screen overflow-auto">
+        <ChatSideBar chats={_chats} chatId={parseInt(chatId)} isPro={isPro} />
         <div className="max-h-screen p-4 overflow-auto flex-[5]">
           <PDFViewer pdf_url={currentChat?.pdfUrl || ""} />
         </div>
